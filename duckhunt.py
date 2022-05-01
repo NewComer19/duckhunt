@@ -6,15 +6,15 @@
 
 from ctypes import *
 import pythoncom
-import pyHook
+from pynput import keyboard
 import win32clipboard
 import win32ui
 import os
 import shutil
 from time import gmtime, strftime
 from sys import stdout
-from Tkinter import *
-from ttk import *
+import tkinter as tk
+from tkinter import ttk
 import imp
 import webbrowser
 import getpass
@@ -161,14 +161,15 @@ def KeyStroke(event):
     # pass execution to next hook registered
     return True
 
+with keyboard.Listener(
+        on_press=on_press,
+        on_release=on_release) as listener:
+    listener.join()
 
 # create and register a hook manager
-kl = pyHook.HookManager()
-kl.KeyDown = KeyStroke
-
 
 def window():
-    window = Tk()
+    window = ttk()
     
     def StopScript():
         exit(0)
@@ -195,7 +196,7 @@ def window():
             window1.overrideredirect(True)
         
         
-        window1 = Tk()
+        window1 = tk()
         window1.title("DuckHunter")
         window1.iconbitmap('favicon.ico')
         window1.geometry('310x45')
@@ -250,11 +251,7 @@ def window():
         bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
         with open(bat_path + '\\' + "duckhunt.bat", "w+") as bat_file:
             bat_file.write(r'start "" %s''\AutoRunDuckHunt.exe' % file_path)        
-                            
-                    
-        
-
-
+                        
 
 
     window.title("DuckHunter")
