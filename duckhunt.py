@@ -54,6 +54,12 @@ prevWindow = []  # What was the previous window
 filename = duckhunt.filename  # Filename to save attacks
 blacklist = duckhunt.blacklist  # Program Blacklist
 
+# what needs to be done:
+# rework approach - move from using hooks to listeners
+# use statistical data instead of setting max speed limit (it can be avoided using delays command or using press command on Arduino keyboard library
+# and typing word one by one using random delays (up to 3ms))
+# record normal human typing, check the delays between key pressingns - build mathematical model with average time for key pressing, holding key, mathematical expectation for the next key hold
+# dispersion for it. Apply this data to build countermeasure for HID attack
 
 # Logging the Attack
 def log(event):
